@@ -24,6 +24,7 @@ A collection of competitive programming templates and algorithms in C++.
 
 - **`binary_lifting_lca.cpp`**: Lowest Common Ancestor using binary lifting
 - **`centroid.cpp`**: Centroid decomposition
+- **`dijkstra.cpp`**: Dijkstra's shortest path algorithm
 - **`dinic.cpp`**: Dinic's algorithm for maximum flow
 - **`hld.cpp`**: Heavy-Light Decomposition
 - **`lca.cpp`**: Lowest Common Ancestor
@@ -59,6 +60,15 @@ DSU dsu(n);  // Initialize with n elements
 dsu.merge(u, v);  // Union operation
 bool connected = dsu.same(u, v);  // Check if in same set
 int sz = dsu.size(u);  // Get size of component
+```
+
+### Example: Using Dijkstra
+
+```cpp
+Dijkstra<ll> dij(n);  // Initialize with n nodes
+dij.addedge(u, v, w);  // Add edge from u to v with weight w
+auto dist = dij.run(source);  // Run from source, returns distance vector
+auto path = dij.get_path(target);  // Get shortest path to target
 ```
 
 ### Example: Using ModInt
