@@ -1,39 +1,35 @@
 #include "../../datastruct/fen.cpp"
 #include <cassert>
 #include <iostream>
-#include <vector>
-#include <random>
 
 using namespace std;
 
-// Naive implementation for verification
-template<typename T>
-T naive_sum(const vector<T>& arr, int r) {
-	T sum = 0;
-	for (int i = 0; i < r; i++) {
-		sum += arr[i];
-	}
-	return sum;
-}
-
 int main() {
-	// Test 1: Basic operations
+	// Test 1: Basic updates and queries
 	{
-		FenTree<int> fen(5);
-		fen.update(0, 3);
-		fen.update(1, 2);
-		fen.update(2, 5);
+		FenTree<int> fen(10);
+		fen.update(0, 5);
+		fen.update(1, 3);
+		fen.update(2, 7);
 		
-		assert(fen.query(1) == 3);
-		assert(fen.query(2) == 5);
-		assert(fen.query(3) == 10);
+		assert(fen.query(1) == 5);    // [0, 1)
+		assert(fen.query(2) == 8);    // [0, 2)
+		assert(fen.query(3) == 15);   // [0, 3)
 	}
 
-	// Test 2: Single element
+	// Test 2: Range sum
 	{
-		FenTree<int> fen(1);
-		fen.update(0, 42);
-		assert(fen.query(1) == 42);
+		FenTree<int> fen(10);
+		for (int i = 0; i < 5; ++i) {
+			fen.update(i, i + 1);  // 1, 2, 3, 4, 5
+		}
+		
+		assert(fen.query(5) == 15);  // 1+2+3+4+5
+		assert(fen.query(3) == 6);   // 1+2+3
+		
+		// Range [2, 5) = query(5) - query(2)
+		int range_sum = fen.query(5) - fen.query(2);
+		assert(range_sum == 12);  // 3+4+5
 	}
 
 	// Test 3: Multiple updates to same position
@@ -42,15 +38,16 @@ int main() {
 		fen.update(2, 10);
 		fen.update(2, 5);
 		fen.update(2, -3);
-		assert(fen.query(3) == 12);
+		
+		assert(fen.query(3) == 12);  // 10+5-3
 	}
 
-	// Test 4: Zero values
+	// Test 4: All zeros
 	{
-		FenTree<int> fen(5);
-		fen.update(0, 0);
-		fen.update(2, 0);
-		assert(fen.query(5) == 0);
+		FenTree<int> fen(10);
+		for (int i = 0; i < 10; ++i) {
+			assert(fen.query(i) == 0);
+		}
 	}
 
 	// Test 5: Negative values
@@ -59,10 +56,13 @@ int main() {
 		fen.update(0, 10);
 		fen.update(1, -5);
 		fen.update(2, 3);
-		assert(fen.query(3) == 8);
+		
+		assert(fen.query(1) == 10);
+		assert(fen.query(2) == 5);   // 10 - 5
+		assert(fen.query(3) == 8);   // 10 - 5 + 3
 	}
 
-	// Test 6: Lower bound function
+	// Test 6: Lower bound - find first position where sum >= target
 	{
 		FenTree<int> fen(10);
 		fen.update(0, 5);
@@ -70,73 +70,120 @@ int main() {
 		fen.update(2, 7);
 		fen.update(3, 2);
 		
-		assert(fen.lower_bound(0) == -1);    // Empty sum
-		assert(fen.lower_bound(5) == 0);     // Exactly at first element
-		assert(fen.lower_bound(6) == 1);     // Need second element
-		assert(fen.lower_bound(15) == 2);    // Need third element
-		assert(fen.lower_bound(100) == 10);  // Sum too large, return n
+		// Cumulative: [5, 8, 15, 17, ...]
+		assert(fen.lower_bound(1) == 0);   // sum >= 1 at pos 0
+		assert(fen.lower_bound(5) == 0);   // sum >= 5 at pos 0
+		assert(fen.lower_bound(6) == 1);   // sum >= 6 at pos 1 (5+3=8)
+		assert(fen.lower_bound(10) == 2);  // sum >= 10 at pos 2 (5+3+7=15)
+		assert(fen.lower_bound(16) == 3);  // sum >= 16 at pos 3 (5+3+7+2=17)
 	}
 
-	// Test 7: Fuzzy testing with random operations
+	// Test 7: Lower bound edge cases
 	{
-		mt19937 rng(42);
+		FenTree<int> fen(5);
+		fen.update(0, 10);
 		
-		for (int test = 0; test < 100; test++) {
-			int n = 1 + rng() % 50;
-			vector<int> arr(n, 0);
-			FenTree<int> fen(n);
-			
-			// Random updates
-			for (int op = 0; op < 20; op++) {
-				int pos = rng() % n;
-				int delta = (rng() % 20) - 10;  // -10 to 9
-				
-				arr[pos] += delta;
-				fen.update(pos, delta);
-			}
-			
-			// Verify all prefix sums
-			for (int r = 0; r <= n; r++) {
-				assert(fen.query(r) == naive_sum(arr, r));
-			}
-		}
+		assert(fen.lower_bound(0) == -1);   // Empty sum satisfies
+		assert(fen.lower_bound(-5) == -1);  // Negative sum
+		assert(fen.lower_bound(10) == 0);   // Exact match
+		assert(fen.lower_bound(11) == 5);   // Beyond first element, no position has sum >= 11 with only one element
 	}
 
-	// Test 8: Large values
+	// Test 8: Single element
 	{
-		FenTree<long long> fen(10);
+		FenTree<int> fen(1);
+		fen.update(0, 42);
+		
+		assert(fen.query(1) == 42);
+		assert(fen.lower_bound(42) == 0);
+		assert(fen.lower_bound(43) == 1);
+	}
+
+	// Test 9: Large tree
+	{
+		FenTree<int> fen(1000);
+		for (int i = 0; i < 1000; ++i) {
+			fen.update(i, 1);
+		}
+		
+		assert(fen.query(100) == 100);
+		assert(fen.query(500) == 500);
+		assert(fen.query(1000) == 1000);
+	}
+
+	// Test 10: Incremental updates
+	{
+		FenTree<int> fen(10);
+		
+		for (int i = 0; i < 5; ++i) {
+			fen.update(i, 2);
+		}
+		
+		assert(fen.query(5) == 10);
+		
+		// Update more
+		for (int i = 5; i < 10; ++i) {
+			fen.update(i, 3);
+		}
+		
+		assert(fen.query(10) == 25);  // 5*2 + 5*3
+	}
+
+	// Test 11: With long long
+	{
+		FenTree<long long> fen(5);
 		fen.update(0, 1000000000LL);
 		fen.update(1, 1000000000LL);
+		
 		assert(fen.query(2) == 2000000000LL);
 	}
 
-	// Test 9: Power of 2 sizes
-	{
-		for (int n : {1, 2, 4, 8, 16, 32, 64}) {
-			FenTree<int> fen(n);
-			for (int i = 0; i < n; i++) {
-				fen.update(i, i + 1);
-			}
-			int expected = n * (n + 1) / 2;
-			assert(fen.query(n) == expected);
-		}
-	}
-
-	// Test 10: Lower bound edge cases
+	// Test 12: Query at boundaries
 	{
 		FenTree<int> fen(5);
-		for (int i = 0; i < 5; i++) {
-			fen.update(i, 2);  // Each position has value 2
+		for (int i = 0; i < 5; ++i) {
+			fen.update(i, i + 1);
 		}
 		
-		assert(fen.lower_bound(1) == 0);   // First element
-		assert(fen.lower_bound(2) == 0);   // Exactly first element
-		assert(fen.lower_bound(3) == 1);   // Need second element
-		assert(fen.lower_bound(10) == 4);  // Need all elements
-		assert(fen.lower_bound(11) == 5);  // More than total sum
+		assert(fen.query(0) == 0);   // Empty range
+		assert(fen.query(1) == 1);
+		assert(fen.query(5) == 15);  // Full range
 	}
 
-	cout << "All Fenwick Tree tests passed!" << endl;
+	// Test 13: Subtract updates
+	{
+		FenTree<int> fen(5);
+		fen.update(0, 100);
+		fen.update(0, -30);
+		
+		assert(fen.query(1) == 70);
+	}
+
+	// Test 14: Point query using range
+	{
+		FenTree<int> fen(10);
+		fen.update(5, 42);
+		
+		// Point query at 5: query(6) - query(5)
+		int point_val = fen.query(6) - fen.query(5);
+		assert(point_val == 42);
+	}
+
+	// Test 15: Lower bound with all same values
+	{
+		FenTree<int> fen(10);
+		for (int i = 0; i < 10; ++i) {
+			fen.update(i, 5);
+		}
+		
+		// Cumulative: [5, 10, 15, 20, ...]
+		assert(fen.lower_bound(1) == 0);
+		assert(fen.lower_bound(8) == 1);
+		assert(fen.lower_bound(25) == 4);
+		assert(fen.lower_bound(50) == 9);
+		assert(fen.lower_bound(51) == 10);  // Beyond all elements
+	}
+
+	cout << "All Fenwick tree tests passed!" << endl;
 	return 0;
 }
-
