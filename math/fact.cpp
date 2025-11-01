@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-#include "modint.cpp"
+#include "mod_int.cpp"
 
 namespace comb {
 	vector<mint> fact, ifact;

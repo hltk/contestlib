@@ -1,3 +1,4 @@
+#include <bit>
 #include <functional>
 #include <iostream>
 #include <numeric>
@@ -27,7 +28,7 @@ public:
 		}
 	}
 	int argmin(int l, int r) {
-		int d = __lg(r - l + 1);
+		int d = std::bit_width((unsigned)(r - l + 1)) - 1;
 		return Comp(spr[d][l], spr[d][r - (1 << d) + 1]);
 	}
 	T getmin(int l, int r) { return v[argmin(l, r)]; }

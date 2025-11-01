@@ -31,7 +31,7 @@ struct ModInt {
 	friend ModInt operator*(const ModInt& a, const ModInt& b) { return ModInt(a) *= b; }
 	friend ModInt operator/(const ModInt& a, const ModInt& b) { return ModInt(a) /= b; }
 
-	bool operator==(const ModInt& oth) { return v == oth.v; }
+	bool operator==(const ModInt& oth) const { return v == oth.v; }
 };
 
 constexpr int MOD = 1e9 + 7;

@@ -1,3 +1,4 @@
+#include <bit>
 #include <vector>
 using namespace std;
 
@@ -21,7 +22,7 @@ struct FenTree {
 	int lower_bound(T sum) {
 		if (sum <= 0) return -1;
 		int pos = 0;
-		for (int bit = 1 << std::__lg(tree.size()); bit; bit >>= 1) {
+		for (int bit = 1 << (std::bit_width((unsigned)tree.size()) - 1); bit; bit >>= 1) {
 			if (pos + bit <= int(tree.size()) && tree[pos + bit - 1] < sum) {
 				pos += bit, sum -= tree[pos - 1];
 			}
