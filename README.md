@@ -70,6 +70,10 @@ mint c = a * b + a / b;  // Automatic modular arithmetic
 cout << c << endl;
 ```
 
+## Coding Style
+
+See [STYLE.md](STYLE.md) for detailed information about the coding conventions used in this library.
+
 ## Testing
 
 This repository includes a test framework to verify the correctness of implementations.
@@ -77,16 +81,19 @@ This repository includes a test framework to verify the correctness of implement
 ### Running Tests
 
 To run all tests:
+
 ```bash
 make test
 ```
 
 To run a specific test (e.g., DSU):
+
 ```bash
 make test-dsu
 ```
 
 To clean compiled test binaries:
+
 ```bash
 make clean
 ```
@@ -99,6 +106,7 @@ make clean
 4. The test will automatically be discovered and compiled by the Makefile
 
 Example test structure:
+
 ```cpp
 #include "../../datastruct/dsu.cpp"
 #include <cassert>
@@ -110,7 +118,7 @@ int main() {
     assert(!dsu.same(0, 1));
     dsu.merge(0, 1);
     assert(dsu.same(0, 1));
-    
+
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
