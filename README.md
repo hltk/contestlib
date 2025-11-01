@@ -10,14 +10,14 @@ A collection of competitive programming templates and algorithms in C++.
 - **`fen.cpp`**: Fenwick Tree (Binary Indexed Tree) for prefix sum queries
 - **`hasher.cpp`**: String hashing utilities
 - **`indexed_set.cpp`**: Ordered set with index-based queries
-- **`lazysegtree.cpp`**: Segment tree with lazy propagation
+- **`lazy_seg_tree.cpp`**: Segment tree with lazy propagation
 - **`lichao.cpp`**: Li Chao tree for maintaining convex hull of lines
 - **`linear_rmq.cpp`**: Linear-time RMQ preprocessing
-- **`monotonicqueue.cpp`**: Monotonic queue for sliding window problems
+- **`monotonic_queue.cpp`**: Monotonic queue for sliding window problems
 - **`rmq.cpp`**: Range Minimum Query with sparse table
-- **`segtree.cpp`**: Standard segment tree implementation
-- **`shortlazysegtree.cpp`**: Compact lazy segment tree
-- **`shortrmq.cpp`**: Compact RMQ implementation
+- **`seg_tree.cpp`**: Standard segment tree implementation
+- **`short_lazy_seg_tree.cpp`**: Compact lazy segment tree
+- **`short_rmq.cpp`**: Compact RMQ implementation
 - **`treap.cpp`**: Treap (randomized binary search tree)
 
 ### Graph Algorithms (`graph/`)
@@ -32,18 +32,18 @@ A collection of competitive programming templates and algorithms in C++.
 ### Math (`math/`)
 
 - **`fact.cpp`**: Factorial and combinatorics utilities
-- **`modint.cpp`**: Modular arithmetic with automatic modulo operations
+- **`mod_int.cpp`**: Modular arithmetic with automatic modulo operations
 
 ### String Algorithms (`string/`)
 
-- **`aho-corasick.cpp`**: Aho-Corasick automaton for multi-pattern matching
+- **`aho_corasick.cpp`**: Aho-Corasick automaton for multi-pattern matching
 
 ### Miscellaneous (`misc/`)
 
 - **`bins.cpp`**: Binary search utilities
 - **`compress_inplace.cpp`**: In-place coordinate compression
 - **`compress.cpp`**: Coordinate compression
-- **`fastinput.cpp`**: Fast I/O for competitive programming
+- **`fast_input.cpp`**: Fast I/O for competitive programming
 - **`rand.cpp`**: Random number generation utilities
 - **`timer.cpp`**: Timing and benchmarking utilities
 - **`vec.cpp`**: Vector utilities and shortcuts
