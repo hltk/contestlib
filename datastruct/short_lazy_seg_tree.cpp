@@ -2,6 +2,7 @@ const int MAXT = 1 << 18;
 
 struct seg {
 	int ps[MAXT * 2], lz[MAXT * 2];
+	seg() : ps{}, lz{} {}
 	int query(int l, int r, int s = 1, int x = 0, int y = MAXT) {
 		if (y <= l || r <= x) return 0;
 		if (l <= x && y <= r) return ps[s];
@@ -25,6 +26,6 @@ struct seg {
 	}
 	void apply(int s, int len, int x) {
 		ps[s] += x * len;
-		lz[s] = x;
+		lz[s] += x;
 	}
 } seg;
