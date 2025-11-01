@@ -6,7 +6,7 @@ using namespace std;
 struct LCA {
 	int n;
 	int B;
-	int m;
+	int m; 
 	vector<int> depth;
 	vector<int> position;
 	vector<int> tour;

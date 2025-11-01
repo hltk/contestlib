@@ -1,48 +1,188 @@
- - segment tree beats?
- - block-cut decomposition
- - eulerian and hamiltonian paths
- - matrix utilities
- - string algorithms: suffix array, suffix tree?, manacher
- - geometry?
+## Missing Implementations
+
+### Graph Algorithms (HIGH PRIORITY)
+
+#### Shortest Paths
+
+- [ ] Dijkstra's algorithm
+- [ ] Bellman-Ford algorithm
+- [ ] Floyd-Warshall algorithm
+
+#### Connectivity & Components
+
+- [ ] Strongly Connected Components (Tarjan/Kosaraju)
+- [ ] Bridges and Articulation Points
+- [ ] Biconnected components
+- [ ] Block-cut tree/decomposition
+- [ ] 2-SAT solver
+
+#### Matching & Flow
+
+- [ ] Bipartite matching (Kuhn's algorithm / Hungarian)
+- [ ] Min-cost max-flow
+- [ ] Minimum vertex cover (bipartite)
+
+#### Tree Algorithms
+
+- [ ] Minimum Spanning Tree (Kruskal/Prim)
+- [ ] Topological sort
+
+#### Other Graph
+
+- [ ] Eulerian path/circuit
+- [ ] Hamiltonian path (backtracking/DP)
+
+### String Algorithms (HIGH PRIORITY)
+
+#### Pattern Matching
+
+- [ ] KMP (Knuth-Morris-Pratt)
+- [ ] Z-algorithm
+- [ ] Rolling hash for string matching
+- [ ] Rabin-Karp
+
+#### Data Structures
+
+- [ ] Trie
+- [ ] Suffix array
+- [ ] Suffix tree
+- [ ] Suffix automaton
+
+#### Palindromes & Other
+
+- [ ] Manacher's algorithm
+- [ ] Palindrome tree
+- [ ] Lyndon factorization
+
+### Math (MEDIUM-HIGH PRIORITY)
+
+#### Number Theory
+
+- [ ] Extended GCD / Bezout's identity
+- [ ] Chinese Remainder Theorem
+- [ ] Sieve of Eratosthenes (prime generation)
+- [ ] Linear sieve
+- [ ] Prime factorization
+- [ ] Modular inverse (extended GCD method)
+- [ ] Euler's totient function
+- [ ] Discrete logarithm (baby-step giant-step)
+- [ ] Primitive root
+
+#### Linear Algebra
+
+- [ ] Matrix class (multiplication, power, addition)
+- [ ] Gaussian elimination
+- [ ] Determinant computation
+- [ ] Matrix inverse
+- [ ] System of linear equations solver
+
+#### Combinatorics & Other
+
+- [ ] Catalan numbers
+- [ ] Stirling numbers
+- [ ] Inclusion-exclusion utilities
+- [ ] Partition function
+
+#### Transforms
+
+- [ ] FFT (Fast Fourier Transform)
+- [ ] NTT (Number Theoretic Transform)
+- [ ] Fast Walsh-Hadamard Transform
+
+### Geometry (MEDIUM PRIORITY)
+
+#### Basic Primitives
+
+- [ ] Point class (2D)
+- [ ] Vector operations (cross product, dot product)
+- [ ] Line class
+- [ ] Circle class
+- [ ] Polygon class
+
+#### Line & Point Operations
+
+- [ ] Line-line intersection
+- [ ] Point-line distance
+- [ ] Point-segment distance
+- [ ] Segment-segment intersection
+- [ ] Line-circle intersection
+- [ ] Circle-circle intersection
+
+#### Polygon Algorithms
+
+- [ ] Convex hull (Graham scan / Andrew's monotone chain)
+- [ ] Polygon area
+- [ ] Point in polygon test
+- [ ] Polygon perimeter
+- [ ] Convex polygon intersection
+
+#### Advanced Geometry
+
+- [ ] Closest pair of points
+- [ ] Rotating calipers
+- [ ] Delaunay triangulation
+- [ ] Voronoi diagram
+- [ ] Half-plane intersection
+
+### Data Structures (LOWER PRIORITY)
+
+- [ ] Sparse table (generic)
+- [ ] Persistent segment tree
+- [ ] Segment tree beats
+- [ ] Square root decomposition
+- [ ] Mo's algorithm
+- [ ] Link-cut tree
+- [ ] Splay tree
+- [ ] Wavelet tree
+- [ ] Palindrome tree
+
+### Dynamic Programming Optimizations
+
+- [ ] Convex hull trick
+- [ ] Divide and conquer optimization
+- [ ] Knuth optimization
+- [ ] Monotone queue optimization
 
 ## Tests to Write
 
 See `tests/datastruct/test_dsu.cpp` as an example of the testing pattern.
 
 ### Data Structures
- - [ ] tests/datastruct/test_fen.cpp
- - [ ] tests/datastruct/test_hasher.cpp
- - [ ] tests/datastruct/test_indexed_set.cpp
- - [ ] tests/datastruct/test_lazy_seg_tree.cpp
- - [ ] tests/datastruct/test_lichao.cpp
- - [ ] tests/datastruct/test_linear_rmq.cpp
- - [ ] tests/datastruct/test_monotonic_queue.cpp
- - [ ] tests/datastruct/test_rmq.cpp
- - [ ] tests/datastruct/test_seg_tree.cpp
- - [ ] tests/datastruct/test_short_lazy_seg_tree.cpp
- - [ ] tests/datastruct/test_short_rmq.cpp
- - [ ] tests/datastruct/test_treap.cpp
+
+- [ ] tests/datastruct/test_fen.cpp
+- [ ] tests/datastruct/test_hasher.cpp
+- [x] tests/datastruct/test_lazy_seg_tree.cpp
+- [x] tests/datastruct/test_lichao.cpp
+- [x] tests/datastruct/test_linear_rmq.cpp
+- [ ] tests/datastruct/test_monotonic_queue.cpp
+- [ ] tests/datastruct/test_rmq.cpp
+- [ ] tests/datastruct/test_seg_tree.cpp
+- [x] tests/datastruct/test_short_rmq.cpp
+- [x] tests/datastruct/test_treap.cpp
 
 ### Graph Algorithms
- - [ ] tests/graph/test_binary_lifting_lca.cpp
- - [ ] tests/graph/test_centroid.cpp
- - [ ] tests/graph/test_dinic.cpp
- - [ ] tests/graph/test_hld.cpp
- - [ ] tests/graph/test_lca.cpp
- - [ ] tests/graph/test_linear_lca.cpp
+
+- [ ] tests/graph/test_binary_lifting_lca.cpp
+- [ ] tests/graph/test_centroid.cpp
+- [ ] tests/graph/test_dinic.cpp
+- [ ] tests/graph/test_hld.cpp
+- [ ] tests/graph/test_lca.cpp
+- [ ] tests/graph/test_linear_lca.cpp
 
 ### Math
- - [ ] tests/math/test_fact.cpp
- - [ ] tests/math/test_mod_int.cpp
+
+- [ ] tests/math/test_fact.cpp
+- [ ] tests/math/test_mod_int.cpp
 
 ### Miscellaneous
- - [ ] tests/misc/test_bins.cpp
- - [ ] tests/misc/test_compress_inplace.cpp
- - [ ] tests/misc/test_compress.cpp
- - [ ] tests/misc/test_fast_input.cpp
- - [ ] tests/misc/test_rand.cpp
- - [ ] tests/misc/test_timer.cpp
- - [ ] tests/misc/test_vec.cpp
+
+- [ ] tests/misc/test_bins.cpp
+- [ ] tests/misc/test_compress_inplace.cpp
+- [ ] tests/misc/test_compress.cpp
+- [ ] tests/misc/test_rand.cpp
+- [x] tests/misc/test_timer.cpp
+- [ ] tests/misc/test_vec.cpp
 
 ### String Algorithms
- - [ ] tests/string/test_aho_corasick.cpp
+
+- [x] tests/string/test_aho_corasick.cpp
