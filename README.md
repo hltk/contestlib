@@ -39,6 +39,7 @@ A collection of competitive programming templates and algorithms in C++.
 
 - **`aho_corasick.cpp`**: Aho-Corasick automaton for multi-pattern matching
 - **`kmp.cpp`**: KMP (Knuth-Morris-Pratt) pattern matching algorithm
+- **`zalgo.cpp`**: Z-algorithm for linear-time string matching
 
 ### Miscellaneous (`misc/`)
 
@@ -88,6 +89,16 @@ KMP kmp("pattern");  // Initialize with pattern
 auto matches = kmp.find_all("text with pattern");  // Find all occurrences
 bool found = kmp.exists("text");  // Check if pattern exists
 int count = kmp.count("text");  // Count occurrences
+```
+
+### Example: Using Z-algorithm
+
+```cpp
+Zalgo zalgo("pattern");  // Initialize with pattern
+auto matches = zalgo.find_all("text with pattern");  // Find all occurrences
+bool found = zalgo.exists("text");  // Check if pattern exists
+int count = zalgo.count("text");  // Count occurrences
+auto z = Zalgo::z_array("string");  // Compute Z-array for any string
 ```
 
 ## Coding Style

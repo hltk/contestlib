@@ -37,7 +37,7 @@
 #### Pattern Matching
 
 - ✅ KMP (Knuth-Morris-Pratt)
-- Z-algorithm
+- ✅ Z-algorithm
 - Rolling hash for string matching
 - Rabin-Karp
 
