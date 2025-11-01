@@ -25,12 +25,6 @@ $(BIN_DIR)/%: $(TEST_DIR)/%.cpp | $(BIN_DIR)
 test: $(TEST_BINARIES)
 	@./run_tests.sh $(TEST_BINARIES)
 
-# Individual test targets (example)
-.PHONY: test-dsu
-test-dsu: $(BIN_DIR)/datastruct/test_dsu
-	@echo "Running DSU test..."
-	@$<
-
 # Clean compiled test binaries
 .PHONY: clean
 clean:
@@ -41,7 +35,6 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  make test       - Compile and run all tests"
-	@echo "  make test-dsu   - Run only the DSU test"
 	@echo "  make clean      - Remove compiled test binaries"
 	@echo "  make help       - Show this help message"
 

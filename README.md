@@ -38,6 +38,7 @@ A collection of competitive programming templates and algorithms in C++.
 ### String Algorithms (`string/`)
 
 - **`aho_corasick.cpp`**: Aho-Corasick automaton for multi-pattern matching
+- **`kmp.cpp`**: KMP (Knuth-Morris-Pratt) pattern matching algorithm
 
 ### Miscellaneous (`misc/`)
 
@@ -78,6 +79,15 @@ using mint = ModInt<1000000007>;
 mint a = 5, b = 3;
 mint c = a * b + a / b;  // Automatic modular arithmetic
 cout << c << endl;
+```
+
+### Example: Using KMP
+
+```cpp
+KMP kmp("pattern");  // Initialize with pattern
+auto matches = kmp.find_all("text with pattern");  // Find all occurrences
+bool found = kmp.exists("text");  // Check if pattern exists
+int count = kmp.count("text");  // Count occurrences
 ```
 
 ## Coding Style
