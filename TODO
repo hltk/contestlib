@@ -11,7 +11,7 @@
 #### Connectivity & Components
 
 - ✅ Strongly Connected Components (Tarjan/Kosaraju)
-- Bridges and Articulation Points
+- ✅ Bridges and Articulation Points
 - Biconnected components
 - Block-cut tree/decomposition
 - 2-SAT solver

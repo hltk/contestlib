@@ -23,6 +23,7 @@ A collection of competitive programming templates and algorithms in C++.
 ### Graph Algorithms (`graph/`)
 
 - **`bellman_ford.cpp`**: Bellman-Ford shortest path algorithm (handles negative edges)
+- **`bridges_art.cpp`**: Bridges and Articulation Points
 - **`floyd_warshall.cpp`**: Floyd-Warshall all-pairs shortest path algorithm
 - **`binary_lifting_lca.cpp`**: Lowest Common Ancestor using binary lifting
 - **`centroid.cpp`**: Centroid decomposition
@@ -156,6 +157,18 @@ auto comps = scc.run();  // Returns list of components (each component is a vect
 int num_comps = scc.comps.size();  // Get number of components
 int comp_id = scc.comp[u];  // Get component ID for vertex u
 auto comp = scc.comps[scc.comp[u]];  // Get all vertices in same component as u
+```
+
+### Example: Using Bridges and Articulation Points
+
+```cpp
+BridgesArt ba(n);  // Initialize with n nodes
+ba.addedge(u, v);  // Add undirected edge u-v
+ba.run();  // Run the algorithm
+// Bridges are stored in ba.bridges (vector of pairs)
+// Articulation points are marked in ba.is_art (boolean vector)
+bool is_bridge = ba.is_bridge(u, v);  // Check if edge (u,v) is a bridge
+bool is_art = ba.is_articulation_point(u);  // Check if vertex u is an articulation point
 ```
 
 ## Coding Style
