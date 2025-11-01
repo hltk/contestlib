@@ -147,6 +147,17 @@
 
 See `tests/datastruct/test_dsu.cpp` as an example of the testing pattern.
 
+### Testing Philosophy
+
+Focus on testing algorithms that can fail with certain inputs. Not all files need tests:
+
+- **DO TEST**: Complex algorithms with edge cases (segment trees, graph algorithms, string matching, RMQ, geometric algorithms, etc.)
+- **SKIP**: Simple wrappers around standard library features (FastInput, timer utilities)
+- **SKIP**: GNU PBDS wrappers and other third-party library interfaces
+- **SKIP**: Trivial utilities with no failure modes
+
+The goal is to catch bugs in algorithmic implementations, not to verify that the standard library works.
+
 ### Data Structures
 
 - [ ] tests/datastruct/test_fen.cpp
