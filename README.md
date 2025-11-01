@@ -31,6 +31,7 @@ A collection of competitive programming templates and algorithms in C++.
 - **`hld.cpp`**: Heavy-Light Decomposition
 - **`lca.cpp`**: Lowest Common Ancestor
 - **`linear_lca.cpp`**: Linear-time LCA preprocessing
+- **`mst.cpp`**: Minimum Spanning Tree using Kruskal's algorithm
 - **`toposort.cpp`**: Topological sort for directed acyclic graphs (DAG)
 
 ### Math (`math/`)
@@ -126,6 +127,15 @@ auto matches = zalgo.find_all("text with pattern");  // Find all occurrences
 bool found = zalgo.exists("text");  // Check if pattern exists
 int count = zalgo.count("text");  // Count occurrences
 auto z = Zalgo::z_array("string");  // Compute Z-array for any string
+```
+
+### Example: Using MST
+
+```cpp
+MST<ll> mst(n);  // Initialize with n nodes
+mst.addedge(u, v, w);  // Add edge from u to v with weight w
+auto [weight, edges] = mst.run();  // Returns MST weight and edges
+ll total_weight = mst.get_weight();  // Get just the weight
 ```
 
 ### Example: Using Topological Sort
