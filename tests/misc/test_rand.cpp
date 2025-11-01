@@ -1,5 +1,5 @@
-#include <chrono>
 #include <random>
+#include <chrono>
 using namespace std;
 
 #include "../../misc/rand.cpp"
@@ -8,86 +8,151 @@ using namespace std;
 #include <set>
 
 int main() {
-	// Test 1: rand() with range
+	// Test 1: Range check [0, 10]
+	{
+		for (int i = 0; i < 100; ++i) {
+			int x = rand(0, 10);
+			assert(x >= 0 && x <= 10);
+		}
+	}
+
+	// Test 2: Range check [5, 5] (single value)
+	{
+		for (int i = 0; i < 10; ++i) {
+			int x = rand(5, 5);
+			assert(x == 5);
+		}
+	}
+
+	// Test 3: Range check negative numbers
+	{
+		for (int i = 0; i < 100; ++i) {
+			int x = rand(-10, -5);
+			assert(x >= -10 && x <= -5);
+		}
+	}
+
+	// Test 4: Range check large numbers
+	{
+		for (int i = 0; i < 100; ++i) {
+			int x = rand(1000000, 1000100);
+			assert(x >= 1000000 && x <= 1000100);
+		}
+	}
+
+	// Test 5: Check that we get different values (not always the same)
 	{
 		set<int> values;
-		for (int i = 0; i < 1000; i++) {
-			int val = rand(1, 10);
-			assert(val >= 1 && val <= 10);
-			values.insert(val);
+		for (int i = 0; i < 100; ++i) {
+			values.insert(rand(0, 100));
 		}
-		// Should have seen multiple different values
-		assert(values.size() > 5);
+		// With 100 samples from [0, 100], we should get multiple distinct values
+		assert(values.size() > 10);
 	}
 
-	// Test 2: rand() without arguments (full range)
+	// Test 6: Range check [0, 1] (binary)
 	{
-		// Just verify it compiles and runs
-		int val = rand<int>();
-		(void)val;  // Unused intentionally
+		set<int> values;
+		for (int i = 0; i < 50; ++i) {
+			int x = rand(0, 1);
+			assert(x == 0 || x == 1);
+			values.insert(x);
+		}
+		// Should get both 0 and 1 with high probability
+		assert(values.size() == 2);
 	}
 
-	// Test 3: Range of 1 (a == b)
+	// Test 7: Long long range
 	{
-		for (int i = 0; i < 100; i++) {
-			assert(rand(5, 5) == 5);
+		for (int i = 0; i < 100; ++i) {
+			long long x = rand<long long>(1000000000LL, 2000000000LL);
+			assert(x >= 1000000000LL && x <= 2000000000LL);
 		}
 	}
 
-	// Test 4: Different ranges
+	// Test 8: Check distribution coverage
 	{
-		for (int i = 0; i < 100; i++) {
-			int val = rand(0, 0);
-			assert(val == 0);
+		// Generate numbers in [0, 9] and verify all are hit eventually
+		set<int> values;
+		for (int i = 0; i < 1000; ++i) {
+			values.insert(rand(0, 9));
 		}
-		
-		for (int i = 0; i < 100; i++) {
-			int val = rand(100, 200);
-			assert(val >= 100 && val <= 200);
-		}
+		// With 1000 samples from [0, 9], we should get all 10 values
+		assert(values.size() == 10);
 	}
 
-	// Test 5: Negative ranges
+	// Test 9: Parameterless rand() returns valid int
 	{
-		for (int i = 0; i < 100; i++) {
-			int val = rand(-10, -5);
-			assert(val >= -10 && val <= -5);
+		// Can't easily test the range, but make sure it compiles and runs
+		for (int i = 0; i < 10; ++i) {
+			int x = rand<int>();
+			(void)x;  // Use the value
 		}
 	}
 
-	// Test 6: Large ranges
+	// Test 10: Check unsigned types
 	{
-		for (int i = 0; i < 100; i++) {
-			long long val = rand<long long>(0LL, 1000000000LL);
-			assert(val >= 0 && val <= 1000000000LL);
+		for (int i = 0; i < 100; ++i) {
+			unsigned int x = rand<unsigned int>(0u, 100u);
+			assert(x <= 100u);
 		}
 	}
 
-	// Test 7: Distribution check (simple)
+	// Test 11: Verify randomness (not all values the same)
 	{
-		vector<int> counts(3, 0);
-		for (int i = 0; i < 3000; i++) {
-			int val = rand(0, 2);
-			counts[val]++;
+		int first = rand(0, 1000000);
+		bool found_different = false;
+		for (int i = 0; i < 100; ++i) {
+			if (rand(0, 1000000) != first) {
+				found_different = true;
+				break;
+			}
 		}
-		// Each value should appear roughly 1000 times (allow 500-1500)
-		for (int c : counts) {
-			assert(c >= 500 && c <= 1500);
-		}
+		assert(found_different);
 	}
 
-	// Test 8: Different types
+	// Test 12: Small range variability
 	{
-		// unsigned
-		unsigned val1 = rand<unsigned>(0u, 100u);
-		assert(val1 <= 100u);
-		
-		// long
-		long val2 = rand<long>(0L, 100L);
-		assert(val2 >= 0L && val2 <= 100L);
+		set<int> values;
+		for (int i = 0; i < 100; ++i) {
+			values.insert(rand(0, 3));
+		}
+		// Should see at least 3 different values
+		assert(values.size() >= 3);
 	}
 
-	cout << "All Rand tests passed!" << endl;
+	// Test 13: Boundary values appear
+	{
+		bool found_0 = false, found_10 = false;
+		for (int i = 0; i < 1000; ++i) {
+			int x = rand(0, 10);
+			if (x == 0) found_0 = true;
+			if (x == 10) found_10 = true;
+		}
+		// Should hit boundaries with high probability
+		assert(found_0 && found_10);
+	}
+
+	// Test 14: Negative to positive range
+	{
+		set<int> values;
+		for (int i = 0; i < 100; ++i) {
+			int x = rand(-5, 5);
+			assert(x >= -5 && x <= 5);
+			values.insert(x);
+		}
+		// Should get good coverage
+		assert(values.size() >= 8);
+	}
+
+	// Test 15: Very large range
+	{
+		for (int i = 0; i < 100; ++i) {
+			long long x = rand<long long>(-1000000000000LL, 1000000000000LL);
+			assert(x >= -1000000000000LL && x <= 1000000000000LL);
+		}
+	}
+
+	cout << "All rand tests passed!" << endl;
 	return 0;
 }
-
