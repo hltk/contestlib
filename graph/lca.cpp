@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-#include "../datastruct/shortrmq.cpp"
+#include "../datastruct/short_rmq.cpp"
 
 // source: kactl
 // O(n log n) preprocessing, O(1) queries
