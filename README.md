@@ -37,7 +37,6 @@ A collection of competitive programming templates and algorithms in C++.
 ### String Algorithms (`string/`)
 
 - **`aho-corasick.cpp`**: Aho-Corasick automaton for multi-pattern matching
-- **`old-aho-corasick.cpp`**: Previous implementation (kept for reference)
 
 ### Miscellaneous (`misc/`)
 
