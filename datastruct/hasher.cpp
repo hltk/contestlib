@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-#include "../math/modint.cpp"
+#include "../math/mod_int.cpp"
 
 namespace hasher {
 	const int MOD = 1e9 + 7;
