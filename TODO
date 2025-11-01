@@ -145,31 +145,15 @@
 
 ## Tests to Write
 
-See `tests/datastruct/test_dsu.cpp` as an example of the testing pattern.
-
-### Testing Philosophy
-
-Focus on testing algorithms that can fail with certain inputs. Not all files need tests:
-
-- **DO TEST**: Complex algorithms with edge cases (segment trees, graph algorithms, string matching, RMQ, geometric algorithms, etc.)
-- **SKIP**: Simple wrappers around standard library features (FastInput, timer utilities)
-- **SKIP**: GNU PBDS wrappers and other third-party library interfaces
-- **SKIP**: Trivial utilities with no failure modes
-
-The goal is to catch bugs in algorithmic implementations, not to verify that the standard library works.
+See `tests/README.md` for testing philosophy and `tests/datastruct/test_dsu.cpp` as an example.
 
 ### Data Structures
 
 - [ ] tests/datastruct/test_fen.cpp
 - [ ] tests/datastruct/test_hasher.cpp
-- [x] tests/datastruct/test_lazy_seg_tree.cpp
-- [x] tests/datastruct/test_lichao.cpp
-- [x] tests/datastruct/test_linear_rmq.cpp
 - [ ] tests/datastruct/test_monotonic_queue.cpp
 - [ ] tests/datastruct/test_rmq.cpp
 - [ ] tests/datastruct/test_seg_tree.cpp
-- [x] tests/datastruct/test_short_rmq.cpp
-- [x] tests/datastruct/test_treap.cpp
 
 ### Graph Algorithms
 
@@ -191,9 +175,4 @@ The goal is to catch bugs in algorithmic implementations, not to verify that the
 - [ ] tests/misc/test_compress_inplace.cpp
 - [ ] tests/misc/test_compress.cpp
 - [ ] tests/misc/test_rand.cpp
-- [x] tests/misc/test_timer.cpp
 - [ ] tests/misc/test_vec.cpp
-
-### String Algorithms
-
-- [x] tests/string/test_aho_corasick.cpp
