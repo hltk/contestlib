@@ -29,6 +29,7 @@ A collection of competitive programming templates and algorithms in C++.
 - **`hld.cpp`**: Heavy-Light Decomposition
 - **`lca.cpp`**: Lowest Common Ancestor
 - **`linear_lca.cpp`**: Linear-time LCA preprocessing
+- **`toposort.cpp`**: Topological sort for directed acyclic graphs (DAG)
 
 ### Math (`math/`)
 
@@ -99,6 +100,14 @@ auto matches = zalgo.find_all("text with pattern");  // Find all occurrences
 bool found = zalgo.exists("text");  // Check if pattern exists
 int count = zalgo.count("text");  // Count occurrences
 auto z = Zalgo::z_array("string");  // Compute Z-array for any string
+```
+
+### Example: Using Topological Sort
+
+```cpp
+TopoSort ts(n);  // Initialize with n nodes
+ts.addedge(u, v);  // Add directed edge u -> v
+auto order = ts.sort();  // Returns topological order, empty if cycle exists
 ```
 
 ## Coding Style
