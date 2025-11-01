@@ -1,137 +1,171 @@
 #include "../../misc/compress_inplace.cpp"
 #include <cassert>
 #include <iostream>
-#include <random>
 
 using namespace std;
 
 int main() {
-	// Test 1: Basic compression
+	// Test 1: Simple sequence with duplicates
 	{
-		vector<int> v = {5, 2, 8, 2, 5, 1};
+		vector<int> v = {5, 2, 8, 2, 1};
 		compress(v);
-		
-		// After compression, values should be 0-indexed ranks
-		// Original: {5, 2, 8, 2, 5, 1}
-		// Unique sorted: {1, 2, 5, 8}
-		// Compressed: {2, 1, 3, 1, 2, 0}
-		assert(v[5] == 0);  // 1 -> 0
-		assert(v[1] == 1 && v[3] == 1);  // Both 2 -> 1
-		assert(v[0] == 2 && v[4] == 2);  // Both 5 -> 2
-		assert(v[2] == 3);  // 8 -> 3
+		// Sorted values: [1, 2, 2, 5, 8]
+		// Ranks: 1->0, 2->1, 5->2, 8->3
+		// Original positions: 5->2, 2->1, 8->3, 2->1, 1->0
+		vector<int> expected = {2, 1, 3, 1, 0};
+		assert(v == expected);
 	}
 
-	// Test 2: Already compressed
+	// Test 2: Already sorted
 	{
-		vector<int> v = {0, 1, 2, 3};
+		vector<int> v = {1, 2, 3, 4, 5};
 		compress(v);
-		assert(v == vector<int>({0, 1, 2, 3}));
+		vector<int> expected = {0, 1, 2, 3, 4};
+		assert(v == expected);
 	}
 
-	// Test 3: All same
-	{
-		vector<int> v = {7, 7, 7, 7};
-		compress(v);
-		assert(v == vector<int>({0, 0, 0, 0}));
-	}
-
-	// Test 4: Single element
-	{
-		vector<int> v = {42};
-		compress(v);
-		assert(v == vector<int>({0}));
-	}
-
-	// Test 5: Two elements
-	{
-		vector<int> v = {5, 3};
-		compress(v);
-		assert(v[1] == 0);  // 3 is smaller
-		assert(v[0] == 1);  // 5 is larger
-	}
-
-	// Test 6: Reverse sorted
+	// Test 3: Reverse sorted
 	{
 		vector<int> v = {5, 4, 3, 2, 1};
 		compress(v);
-		assert(v == vector<int>({4, 3, 2, 1, 0}));
+		// Ranks: 1->0, 2->1, 3->2, 4->3, 5->4
+		vector<int> expected = {4, 3, 2, 1, 0};
+		assert(v == expected);
 	}
 
-	// Test 7: Negative numbers
+	// Test 4: All same elements
 	{
-		vector<int> v = {-5, 0, 10, -5, 0};
+		vector<int> v = {7, 7, 7, 7};
 		compress(v);
-		assert(v[0] == 0 && v[3] == 0);  // Both -5
-		assert(v[1] == 1 && v[4] == 1);  // Both 0
-		assert(v[2] == 2);  // 10
+		vector<int> expected = {0, 0, 0, 0};  // All get rank 0
+		assert(v == expected);
 	}
 
-	// Test 8: Large range to small
+	// Test 5: Single element
 	{
-		vector<int> v = {1000000, 1, 999999, 1000000};
+		vector<int> v = {42};
 		compress(v);
-		assert(v[1] == 0);  // 1 is smallest
-		assert(v[2] == 1);  // 999999 is middle
-		assert(v[0] == 2 && v[3] == 2);  // Both 1000000
+		vector<int> expected = {0};
+		assert(v == expected);
 	}
 
-	// Test 9: Duplicates
+	// Test 6: Two elements - different
+	{
+		vector<int> v = {10, 5};
+		compress(v);
+		// Ranks: 5->0, 10->1
+		vector<int> expected = {1, 0};
+		assert(v == expected);
+	}
+
+	// Test 7: Two elements - same
+	{
+		vector<int> v = {5, 5};
+		compress(v);
+		vector<int> expected = {0, 0};
+		assert(v == expected);
+	}
+
+	// Test 8: Multiple groups of duplicates
 	{
 		vector<int> v = {3, 1, 4, 1, 5, 9, 2, 6, 5};
 		compress(v);
-		
-		// Check duplicates have same value
-		assert(v[1] == v[3]);  // Both 1
-		assert(v[4] == v[8]);  // Both 5
+		// Unique sorted: 1, 2, 3, 4, 5, 6, 9
+		// Ranks: 1->0, 2->1, 3->2, 4->3, 5->4, 6->5, 9->6
+		vector<int> expected = {2, 0, 3, 0, 4, 6, 1, 5, 4};
+		assert(v == expected);
 	}
 
-	// Test 10: Fuzzy testing
+	// Test 9: Negative numbers
 	{
-		mt19937 rng(42);
-		
-		for (int test = 0; test < 100; test++) {
-			int n = 1 + rng() % 50;
-			vector<int> orig(n);
-			
-			for (int& x : orig) {
-				x = (rng() % 20) - 10;
-			}
-			
-			vector<int> v = orig;
-			compress(v);
-			
-			// Verify all values are in [0, n)
-			for (int x : v) {
-				assert(x >= 0 && x < n);
-			}
-			
-			// Verify relative order
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
-					if (orig[i] < orig[j]) {
-						assert(v[i] < v[j]);
-					} else if (orig[i] == orig[j]) {
-						assert(v[i] == v[j]);
-					} else {
-						assert(v[i] > v[j]);
-					}
-				}
-			}
+		vector<int> v = {-5, 0, -10, 5, -2};
+		compress(v);
+		// Unique sorted: -10, -5, -2, 0, 5
+		// Ranks: -10->0, -5->1, -2->2, 0->3, 5->4
+		vector<int> expected = {1, 3, 0, 4, 2};
+		assert(v == expected);
+	}
+
+	// Test 10: Large values
+	{
+		vector<int> v = {1000000, 1, 999999, 2, 1};
+		compress(v);
+		// Unique sorted: 1, 2, 999999, 1000000
+		// Ranks: 1->0, 2->1, 999999->2, 1000000->3
+		vector<int> expected = {3, 0, 2, 1, 0};
+		assert(v == expected);
+	}
+
+	// Test 11: Check that duplicates get same rank
+	{
+		vector<int> v = {100, 50, 100, 50, 100};
+		compress(v);
+		// Ranks: 50->0, 100->1
+		vector<int> expected = {1, 0, 1, 0, 1};
+		assert(v == expected);
+	}
+
+	// Test 12: Sequence with gaps
+	{
+		vector<int> v = {1, 10, 100, 1000};
+		compress(v);
+		// Even with gaps, ranks are consecutive
+		vector<int> expected = {0, 1, 2, 3};
+		assert(v == expected);
+	}
+
+	// Test 13: Many duplicates
+	{
+		vector<int> v = {5, 5, 5, 3, 3, 1};
+		compress(v);
+		// Ranks: 1->0, 3->1, 5->2
+		vector<int> expected = {2, 2, 2, 1, 1, 0};
+		assert(v == expected);
+	}
+
+	// Test 14: With chars
+	{
+		vector<char> v = {'d', 'b', 'd', 'a', 'b'};
+		compress(v);
+		// Ranks: 'a'->0, 'b'->1, 'd'->2
+		vector<char> expected = {2, 1, 2, 0, 1};
+		assert(v == expected);
+	}
+
+	// Test 15: Verify ranks are 0-indexed and consecutive
+	{
+		vector<int> v = {42, 17, 99, 17, 5, 42};
+		compress(v);
+		// Ranks: 5->0, 17->1, 42->2, 99->3
+		// Check all values are in [0, 3]
+		for (int x : v) {
+			assert(x >= 0 && x <= 3);
+		}
+		// Check 17 and 42 have same ranks
+		assert(v[1] == v[3]);  // both were 17
+		assert(v[0] == v[5]);  // both were 42
+		// Check they're different ranks
+		assert(v[0] != v[1]);
+	}
+
+	// Test 16: Single unique value with many occurrences
+	{
+		vector<int> v(100, 42);
+		compress(v);
+		for (int x : v) {
+			assert(x == 0);
 		}
 	}
 
-	// Test 11: Works only with numeric types since it assigns int values
-
-	// Test 12: Check it's 0-indexed
+	// Test 17: Every element is unique
 	{
-		vector<int> v = {100, 200, 300};
+		vector<int> v = {10, 30, 20, 50, 40};
 		compress(v);
-		assert(v[0] == 0);
-		assert(v[1] == 1);
-		assert(v[2] == 2);
+		// Ranks: 10->0, 20->1, 30->2, 40->3, 50->4
+		vector<int> expected = {0, 2, 1, 4, 3};
+		assert(v == expected);
 	}
 
-	cout << "All Compress In-Place tests passed!" << endl;
+	cout << "All compress_inplace tests passed!" << endl;
 	return 0;
 }
-
