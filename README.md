@@ -22,6 +22,8 @@ A collection of competitive programming templates and algorithms in C++.
 
 ### Graph Algorithms (`graph/`)
 
+- **`bellman_ford.cpp`**: Bellman-Ford shortest path algorithm (handles negative edges)
+- **`floyd_warshall.cpp`**: Floyd-Warshall all-pairs shortest path algorithm
 - **`binary_lifting_lca.cpp`**: Lowest Common Ancestor using binary lifting
 - **`centroid.cpp`**: Centroid decomposition
 - **`dijkstra.cpp`**: Dijkstra's shortest path algorithm
@@ -72,6 +74,30 @@ Dijkstra<ll> dij(n);  // Initialize with n nodes
 dij.addedge(u, v, w);  // Add edge from u to v with weight w
 auto dist = dij.run(source);  // Run from source, returns distance vector
 auto path = dij.get_path(target);  // Get shortest path to target
+```
+
+### Example: Using Bellman-Ford
+
+```cpp
+BellmanFord<ll> bf(n);  // Initialize with n nodes
+bf.addedge(u, v, w);  // Add edge from u to v with weight w (can be negative)
+auto dist = bf.run(source);  // Run from source, returns distance vector
+if (bf.has_negative_cycle()) {
+    // Graph contains a negative cycle reachable from source
+}
+auto path = bf.get_path(target);  // Get shortest path to target
+```
+
+### Example: Using Floyd-Warshall
+
+```cpp
+FloydWarshall<ll> fw(n);  // Initialize with n nodes
+fw.addedge(u, v, w);  // Add edge from u to v with weight w (can be negative)
+bool no_cycle = fw.run();  // Run algorithm, returns true if no negative cycles
+if (!fw.has_negative_cycle()) {
+    ll dist = fw.get_dist(u, v);  // Get shortest distance from u to v
+    auto path = fw.get_path(u, v);  // Get shortest path from u to v
+}
 ```
 
 ### Example: Using ModInt
