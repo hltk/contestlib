@@ -31,5 +31,3 @@ public:
 		return rmq.getmin(l, r).second;
 	}
 };
-
-int main() {}

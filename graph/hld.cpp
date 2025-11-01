@@ -58,7 +58,7 @@ private:
 	}
 };
 
-#include "../datastruct/segtree.cpp"
+#include "../datastruct/seg_tree.cpp"
 
 //int main() {
 //	int n, q;
