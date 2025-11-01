@@ -4,3 +4,45 @@
  - matrix utilities
  - string algorithms: suffix array, suffix tree?, manacher
  - geometry?
+
+## Tests to Write
+
+See `tests/datastruct/test_dsu.cpp` as an example of the testing pattern.
+
+### Data Structures
+ - [ ] tests/datastruct/test_fen.cpp
+ - [ ] tests/datastruct/test_hasher.cpp
+ - [ ] tests/datastruct/test_indexed_set.cpp
+ - [ ] tests/datastruct/test_lazy_seg_tree.cpp
+ - [ ] tests/datastruct/test_lichao.cpp
+ - [ ] tests/datastruct/test_linear_rmq.cpp
+ - [ ] tests/datastruct/test_monotonic_queue.cpp
+ - [ ] tests/datastruct/test_rmq.cpp
+ - [ ] tests/datastruct/test_seg_tree.cpp
+ - [ ] tests/datastruct/test_short_lazy_seg_tree.cpp
+ - [ ] tests/datastruct/test_short_rmq.cpp
+ - [ ] tests/datastruct/test_treap.cpp
+
+### Graph Algorithms
+ - [ ] tests/graph/test_binary_lifting_lca.cpp
+ - [ ] tests/graph/test_centroid.cpp
+ - [ ] tests/graph/test_dinic.cpp
+ - [ ] tests/graph/test_hld.cpp
+ - [ ] tests/graph/test_lca.cpp
+ - [ ] tests/graph/test_linear_lca.cpp
+
+### Math
+ - [ ] tests/math/test_fact.cpp
+ - [ ] tests/math/test_mod_int.cpp
+
+### Miscellaneous
+ - [ ] tests/misc/test_bins.cpp
+ - [ ] tests/misc/test_compress_inplace.cpp
+ - [ ] tests/misc/test_compress.cpp
+ - [ ] tests/misc/test_fast_input.cpp
+ - [ ] tests/misc/test_rand.cpp
+ - [ ] tests/misc/test_timer.cpp
+ - [ ] tests/misc/test_vec.cpp
+
+### String Algorithms
+ - [ ] tests/string/test_aho_corasick.cpp

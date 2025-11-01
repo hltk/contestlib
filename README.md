@@ -70,6 +70,52 @@ mint c = a * b + a / b;  // Automatic modular arithmetic
 cout << c << endl;
 ```
 
+## Testing
+
+This repository includes a test framework to verify the correctness of implementations.
+
+### Running Tests
+
+To run all tests:
+```bash
+make test
+```
+
+To run a specific test (e.g., DSU):
+```bash
+make test-dsu
+```
+
+To clean compiled test binaries:
+```bash
+make clean
+```
+
+### Adding New Tests
+
+1. Create a test file in the appropriate subdirectory of `tests/` following the naming convention `test_*.cpp`
+2. Include the implementation file using a relative path (e.g., `#include "../../datastruct/dsu.cpp"`)
+3. Write test cases using assertions
+4. The test will automatically be discovered and compiled by the Makefile
+
+Example test structure:
+```cpp
+#include "../../datastruct/dsu.cpp"
+#include <cassert>
+#include <iostream>
+
+int main() {
+    // Test case 1
+    DSU dsu(5);
+    assert(!dsu.same(0, 1));
+    dsu.merge(0, 1);
+    assert(dsu.same(0, 1));
+    
+    std::cout << "All tests passed!" << std::endl;
+    return 0;
+}
+```
+
 ## Contributing
 
 This is a personal competitive programming library. Feel free to use these implementations in your own contests or as reference material.
