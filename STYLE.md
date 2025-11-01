@@ -4,7 +4,7 @@ This library follows consistent coding conventions optimized for competitive pro
 
 ## Naming Conventions
 
-- **Classes**: PascalCase (`DSU`, `Tree`, `ModInt`, `LCA`, `FenTree`, `AhoCorasick`, `Treap`, `Dinic`, `HLD`)
+- **Structs**: PascalCase (`DSU`, `Tree`, `ModInt`, `LCA`, `FenTree`, `AhoCorasick`, `Treap`, `Dinic`, `HLD`)
 - **Functions/Methods**: snake_case (`root`, `same`, `merge`, `query`, `add_word`, `dfs_sz`, `push`, `pull`)
 - **Variables**: snake_case, often abbreviated for brevity (`f`, `siz`, `n`, `g`, `v`, `w`, `par`, `sz`, `jmp`, `in`)
 - **Template Parameters**:
@@ -12,10 +12,14 @@ This library follows consistent coding conventions optimized for competitive pro
   - Non-type parameters: Uppercase (`MOD`, `AS`)
 - **Type Aliases**: snake_case with standard abbreviations (`ll`, `vi`, `mint`, `graph`)
 
+## Structs vs Classes
+
+- **Always use structs**: All data structures use `struct`, never `class`
+- **No access specifiers**: Members are naturally public by default; no `public:` or `private:` keywords
+- **Member ordering**: Implementation details and helper functions come first, followed by the primary public interface
+
 ## Code Organization
 
-- **Private members first**: Helper functions and internal state are placed before the public interface
-- **Public interface follows**: User-facing methods are grouped together at the end
 - **Self-contained**: Each file can be copied directly into a solution without dependencies (except for explicit includes)
 
 ## Formatting

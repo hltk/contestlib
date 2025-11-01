@@ -4,7 +4,7 @@ using namespace std;
 
 // Topological sort for directed acyclic graphs (DAG)
 // Time: O(V + E), Space: O(V)
-class TopoSort {
+struct TopoSort {
 	vector<vector<int>> g;
 	int n;
 	vector<int> color, order;
@@ -20,7 +20,6 @@ class TopoSort {
 		return true;
 	}
 
-public:
 	TopoSort(int n) : g(n), n(n) {}
 
 	void addedge(int a, int b) {

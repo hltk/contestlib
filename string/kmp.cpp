@@ -6,7 +6,7 @@ using namespace std;
 // Builds failure function and finds all occurrences of pattern in text
 // Time: O(n + m) where n = text length, m = pattern length
 // Space: O(m) for failure function
-class KMP {
+struct KMP {
 	vector<int> fail;
 	string pattern;
 
@@ -26,7 +26,6 @@ class KMP {
 		}
 	}
 
-public:
 	KMP(const string& pat) : pattern(pat) {
 		build_fail();
 	}

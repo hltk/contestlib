@@ -1,7 +1,6 @@
 template<char MC = 'a', int AS = 26>
-class AhoCorasick {
-	class Node {
-	public:
+struct AhoCorasick {
+	struct Node {
 		int nxt[AS];
 		int link = 0; // suffix link to the next true suffix that appears in the tree
 		int dict = -1; // suffix link to the next true suffix that appears in the dictionary
@@ -26,7 +25,6 @@ class AhoCorasick {
 	vector<int> word_index;
 	vector<int> sorted_word_indices;
 	vector<int> rev;
-public:
 	AhoCorasick(vector<string>& words) : nodes(1), word_index(words.size()), rev(words.size()) {
 		for (int i = 0; i < (int)words.size(); ++i) {
 			word_index[i] = add_word(words[i]);

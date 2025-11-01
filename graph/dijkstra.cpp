@@ -8,12 +8,11 @@ using ll = long long;
 // Dijkstra's shortest path algorithm
 // O(E log V) time complexity
 template<typename T = ll>
-class Dijkstra {
+struct Dijkstra {
 	vector<vector<pair<int, T>>> g;
 	vector<T> dist;
 	vector<int> par;
 
-public:
 	Dijkstra(int n) : g(n) {}
 
 	void addedge(int a, int b, T w, bool directed = false) {

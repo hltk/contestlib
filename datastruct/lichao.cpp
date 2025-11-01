@@ -3,21 +3,19 @@ using namespace std;
 using ll = long long;
 
 template<class T>
-class Line {
-public:
+struct Line {
 	T a, b;
 	Line(T a, T b) : a(a), b(b) {}
 	T operator()(T x) { return x * a + b; }
 };
 
 template<class T>
-class LiChao {
+struct LiChao {
 	const T INF = numeric_limits<T>::max() >> 2;
 	int n;
 	vector<Line<T>> p;
 	vector<int> xs;
 
-public:
 	LiChao(int n, vector<int>& basex) : n(n), p(n * 2, Line<T>(0, INF)), xs(n * 2) {
 		for (int i = 0; i < int(basex.size()); ++i) xs[i + n] = basex[i];
 		for (int i = int(basex.size()); i < n; ++i) xs[i + n] = i > 0 ? xs[i + n - 1] + 1 : 0;

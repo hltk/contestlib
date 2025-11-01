@@ -8,10 +8,9 @@ using namespace std;
 // source: own, Benq
 // O(n log n) preprocessing, O(1) queries
 template<class T, class Comparator = less<T>>
-class RMQ {
+struct RMQ {
 	vector<vector<T>> spr;
 
-public:
 	RMQ(const vector<T>& v) {
 		spr = {v};
 		for (int j = 1; (1 << j) <= sz(v); ++j) {

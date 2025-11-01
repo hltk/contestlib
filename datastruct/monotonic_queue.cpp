@@ -2,11 +2,10 @@
 using namespace std;
 
 template<class T, class Compare>
-class MonotonicQueue {
+struct MonotonicQueue {
 	int l = 0, r = 0;
 	deque<pair<T, int>> d;
 
-public:
 	void push(T x) {
 		while (!d.empty() && !Compare()(d.back().first, x)) {
 			d.pop_back();

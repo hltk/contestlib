@@ -5,13 +5,12 @@ using namespace std;
 // Basic segment tree. Takes the size of tree, an identity value
 // and a binary function as parameters
 template<class T>
-class Tree {
+struct Tree {
 	int n; // Has to be a power of 2
 	T I;
 	function<T(T, T)> f;
 	vector<T> t;
 
-public:
 	Tree(int n, T I, function<T(T, T)> f) : n(n), I(I), f(f), t(n * 2, I) {}
 
 	void change(int k, T x) {

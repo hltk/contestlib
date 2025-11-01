@@ -6,7 +6,7 @@ using namespace std;
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 // source: cses.fi/ioi16/list, cses.fi/alon20/list, mango_lassi
-class Treap {
+struct Treap {
 	template<class T>
 	int rand() {
 		return uniform_int_distribution<T>()(rng);
@@ -21,7 +21,6 @@ class Treap {
 		sz = 1 + (l != nullptr ? l->sz : 0) + (r != nullptr ? r->sz : 0);
 	}
 
-public:
 	Treap(int v_) : l(0), r(0), prior(rand<int>()), sz(1), v(v_) {}
 	static Treap* merge(Treap* a, Treap* b) {
 		if (a != nullptr) {

@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 
 // O(n log n) preprocessing, O(log n) queries
-class LCA {
+struct LCA {
 	int k;
 	vector<int> dep;
 	vector<vector<int>> spr;
@@ -21,7 +21,6 @@ class LCA {
 		}
 	}
 
-public:
 	LCA(vector<vector<int>>& g) : k(__lg(g.size())), dep(g.size()), spr(g.size(), vector<int>(k + 1)) {
 		dfs(0, 0, g);
 	}

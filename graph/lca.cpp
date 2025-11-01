@@ -6,7 +6,7 @@ using namespace std;
 
 // source: kactl
 // O(n log n) preprocessing, O(1) queries
-class LCA {
+struct LCA {
 	int T = 0;
 	vector<int> time, dist;
 	vector<pair<int, int>> r;
@@ -23,7 +23,6 @@ class LCA {
 		}
 	}
 
-public:
 	LCA(vector<vector<int>>& g) : time(g.size()), dist(g.size()), rmq((dfs(0, 0, g), r)) {}
 
 	int query(int a, int b) {

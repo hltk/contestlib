@@ -7,7 +7,7 @@ using namespace std;
 // which is also a prefix of the string
 // Time: O(n + m) where n = text length, m = pattern length
 // Space: O(m) for Z-array
-class Zalgo {
+struct Zalgo {
 	vector<int> z;
 	string pattern;
 
@@ -34,7 +34,6 @@ class Zalgo {
 		return z;
 	}
 
-public:
 	Zalgo(const string& pat) : pattern(pat) {
 		z = compute_z(pattern);
 	}

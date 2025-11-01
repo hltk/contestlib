@@ -4,7 +4,7 @@
 using namespace std;
 using ll = long long;
 
-class Dinic {
+struct Dinic {
 	vector<vector<pair<int, int>>> g;
 	vector<ll> w;
 	vector<int> calclvls(int source) {
@@ -41,7 +41,6 @@ class Dinic {
 		return r;
 	}
 
-public:
 	Dinic(int n) : g(n) {};
 
 	void addedge(int a, int b, int c, bool directed) {

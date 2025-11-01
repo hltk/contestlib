@@ -3,8 +3,18 @@
 #include <string>
 #include <type_traits>
 
-class FastInput {
-public:
+struct FastInput {
+	char buf[1 << 20];
+	size_t it = 0, n = 0;
+	char next_char() {
+		if (it >= n) {
+			buf[0] = 0;
+			it = 0;
+			n = std::fread(buf, 1, sizeof(buf), stdin);
+		}
+		return buf[it++];
+	}
+
 	template<class T>
 	std::enable_if_t<std::is_integral_v<T>, FastInput&> operator>>(T& t) {
 		char c;
@@ -34,18 +44,6 @@ public:
 	FastInput& operator>>(char& c) {
 		while (isspace(c = next_char())) {}
 		return *this;
-	}
-
-private:
-	char buf[1 << 20];
-	size_t it = 0, n = 0;
-	char next_char() {
-		if (it >= n) {
-			buf[0] = 0;
-			it = 0;
-			n = std::fread(buf, 1, sizeof(buf), stdin);
-		}
-		return buf[it++];
 	}
 } ft;
 

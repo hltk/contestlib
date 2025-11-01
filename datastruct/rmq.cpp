@@ -9,14 +9,13 @@ using namespace std;
 // source: own, Benq
 // O(n log n) preprocessing, O(1) queries
 template<class T, class Comparator = less<T>>
-class RMQ {
+struct RMQ {
 	vector<vector<int>> spr;
 	vector<T> v;
 	int Comp(int i, int j) {
 		return Comparator()(v[i], v[j]) ? i : j;
 	}
 
-public:
 	RMQ(const vector<T>& v) : v(v) {
 		spr = {vector<int>(sz(v))};
 		iota(spr[0].begin(), spr[0].end(), 0);

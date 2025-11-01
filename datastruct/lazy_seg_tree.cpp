@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-class SegmentTree {
+struct SegmentTree {
 	int n;
 	vector<long> p;
 	vector<long> l;
@@ -34,7 +34,6 @@ class SegmentTree {
 		p[s] = p[s * 2] + p[s * 2 + 1];
 	}
 
-public:
 	SegmentTree(int _n) : n(2 << std::__lg(_n - 1)), p(n * 4), l(n * 4) {}
 	long query(int l, int r) { // [l, r)
 		return query(1, l, r, 0, n);
