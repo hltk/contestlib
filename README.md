@@ -32,6 +32,7 @@ A collection of competitive programming templates and algorithms in C++.
 - **`lca.cpp`**: Lowest Common Ancestor
 - **`linear_lca.cpp`**: Linear-time LCA preprocessing
 - **`mst.cpp`**: Minimum Spanning Tree using Kruskal's algorithm
+- **`scc.cpp`**: Strongly Connected Components using Kosaraju's algorithm
 - **`toposort.cpp`**: Topological sort for directed acyclic graphs (DAG)
 
 ### Math (`math/`)
@@ -144,6 +145,17 @@ ll total_weight = mst.get_weight();  // Get just the weight
 TopoSort ts(n);  // Initialize with n nodes
 ts.addedge(u, v);  // Add directed edge u -> v
 auto order = ts.sort();  // Returns topological order, empty if cycle exists
+```
+
+### Example: Using Strongly Connected Components (SCC)
+
+```cpp
+SCC scc(n);  // Initialize with n nodes
+scc.addedge(u, v);  // Add directed edge u -> v
+auto comps = scc.run();  // Returns list of components (each component is a vector of vertex indices)
+int num_comps = scc.comps.size();  // Get number of components
+int comp_id = scc.comp[u];  // Get component ID for vertex u
+auto comp = scc.comps[scc.comp[u]];  // Get all vertices in same component as u
 ```
 
 ## Coding Style

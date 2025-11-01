@@ -10,7 +10,7 @@
 
 #### Connectivity & Components
 
-- Strongly Connected Components (Tarjan/Kosaraju)
+- ✅ Strongly Connected Components (Tarjan/Kosaraju)
 - Bridges and Articulation Points
 - Biconnected components
 - Block-cut tree/decomposition
