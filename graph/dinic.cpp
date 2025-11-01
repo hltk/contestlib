@@ -52,6 +52,7 @@ public:
 	}
 
 	ll push(int source, int t) {
+		if (source == t) return 0;
 		ll flow = 0, f;
 		do {
 			auto lvl = calclvls(source);
