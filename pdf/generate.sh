@@ -36,9 +36,11 @@ add_section() {
     while IFS= read -r file; do
         if [ -f "$file" ]; then
             local filename=$(basename "$file")
+            # Escape underscores for LaTeX
+            local latex_filename="${filename//_/\\_}"
             echo "  - $filename"
             
-            echo "\\subsection{$filename}" >> "$PDF_DIR/main.tex"
+            echo "\\subsection{$latex_filename}" >> "$PDF_DIR/main.tex"
             echo "\\begin{minted}[fontsize=\\tiny]{cpp}" >> "$PDF_DIR/main.tex"
             cat "$file" >> "$PDF_DIR/main.tex"
             echo "\\end{minted}" >> "$PDF_DIR/main.tex"
