@@ -1,0 +1,40 @@
+\documentclass[9pt,landscape,twocolumn,a4paper]{article}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{extsizes}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{pdflscape}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage[top=1.5cm, bottom=1.2cm, left=0.5cm, right=0.7cm]{geometry}
+\setlength\columnsep{20pt}
+
+% Minted settings for compact code display
+\setminted{
+    fontsize=\footnotesize,
+    linenos=false,
+    breaklines=true,
+    breakanywhere=false,
+    autogobble=true,
+    tabsize=4,
+    xleftmargin=0pt,
+    frame=none
+}
+
+\begin{document}
+\pagestyle{fancy}
+\lhead{\Large Competitive Programming Reference}
+\chead{}
+\rhead{\Large \thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\clearpage
+\setlength{\columnseprule}{0.4pt}
+\fontsize{0.29cm}{0.33cm}\selectfont
+\tableofcontents
+\clearpage
+

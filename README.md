@@ -175,6 +175,20 @@ bool is_art = ba.is_articulation_point(u);  // Check if vertex u is an articulat
 
 See [STYLE.md](STYLE.md) for detailed information about the coding conventions used in this library.
 
+## PDF Reference Document
+
+You can generate a nicely formatted PDF reference document containing all implementations:
+
+```bash
+./pdf/generate.sh
+```
+
+This will create `contestlib.pdf` in the repository root with syntax-highlighted code organized by category. The PDF is useful for quick reference during contests or for printing.
+
+For detailed instructions, prerequisites, and customization options, see [pdf/README.md](pdf/README.md).
+
+**Note:** The PDF generation logic has been adapted and simplified from [Laakeri's contestlib](https://github.com/Laakeri/contestlib).
+
 ## Testing
 
 This repository includes a test framework to verify the correctness of implementations.
