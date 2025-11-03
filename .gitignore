@@ -4,11 +4,10 @@ tests/bin/
 # Laakeri's original contestlib (reference only)
 contestlib/
 
-# PDF generation artifacts
+# PDF generation artifacts (not the final PDF)
 *.aux
 *.log
 *.toc
 *.out
 _minted-*/
-contestlib.pdf
 pdf/main.*
