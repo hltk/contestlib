@@ -42,28 +42,3 @@ struct LiChao {
 		return ret;
 	}
 };
-
-// int main() {
-// 	vector<int> xs((1 << 20));
-// 	iota(begin(xs), end(xs), 0);
-// 	LiChao<ll> tree((1 << 20), xs);
-//
-// 	int n, e;
-// 	cin >> n >> e;
-// 	vector<int> a(n), b(n);
-// 	for (auto& x : a)
-// 		cin >> x;
-// 	for (auto& x : b)
-// 		cin >> x;
-//
-// 	tree.add_line(Line<ll>(e, 0));
-//
-// 	ll x;
-//
-// 	for (int i = 0; i < n; ++i) {
-// 		x = tree.get_best(a[i]);
-// 		tree.add_line(Line<ll>(b[i], x));
-// 	}
-//
-// 	cout << x << '\n';
-// }

@@ -57,37 +57,3 @@ struct HLD {
 };
 
 #include "../datastruct/seg_tree.cpp"
-
-//int main() {
-//	int n, q;
-//	cin >> n >> q;
-//	vi v(n);
-//	for (int i = 0; i < n; ++i) cin >> v[i];
-//	graph g(n);
-//	for (int i = 0; i < n - 1; ++i) {
-//		int a, b;
-//		cin >> a >> b;
-//		a--; b--;
-//		g[a].push_back(b);
-//		g[b].push_back(a);
-//	}
-//	HLD hld(g);
-//	Tree<int> tree(1 << (__lg(n) + 1), 0, [](int a, int b) { return max(a, b); });
-//	for (int i = 0; i < n; ++i) tree.change(hld.pos(i), v[i]);
-//	for (int i = 0; i < q; ++i) {
-//		int a, b, c;
-//		cin >> a >> b >> c;
-//		if (a == 1) {
-//			b--;
-//			tree.change(hld.pos(b), c);
-//		} else {
-//			b--; c--;
-//			int ans = 0;
-//			auto u = hld.query(b, c);
-//			for (auto [l, r] : u) {
-//				ans = max(ans, tree.query(l, r));
-//			}
-//			cout << ans << '\n';
-//		}
-//	}
-//}
