@@ -1,4 +1,4 @@
-CXX = g++-15
+CXX = g++-16
 CXXFLAGS = -std=c++20 -Wall -Wextra -O2
 TEST_DIR = tests
 BIN_DIR = $(TEST_DIR)/bin
