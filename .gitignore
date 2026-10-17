@@ -1,9 +1,6 @@
 a.out
 tests/bin/
 
-# Laakeri's original contestlib (reference only)
-contestlib/
-
 # PDF generation artifacts (not the final PDF)
 *.aux
 *.log
