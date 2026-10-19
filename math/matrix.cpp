@@ -89,7 +89,7 @@ struct Mat {
 	template <int bR, int bC, class bT>
 	bool operator==(const Mat<bR, bC, bT>& b) const { return R == bR && C == bC && m == b.m; }
 
-	T operator[](int i) const { return m[i]; }
+	T& operator[](int i) const { return m[i]; }
 
 	M inv() const {
 		static_assert(R == 2 && C == 2);
