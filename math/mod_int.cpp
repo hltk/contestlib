@@ -34,5 +34,9 @@ struct ModInt {
 	bool operator==(const ModInt& oth) const { return v == oth.v; }
 };
 
+
+template <int Mod>
+ModInt<Mod> abs(ModInt<Mod> t) { return t; }
+
 constexpr int MOD = 1e9 + 7;
 using mint = ModInt<MOD>;

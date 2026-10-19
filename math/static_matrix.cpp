@@ -101,6 +101,4 @@ struct Mat {
 	}
 };
 
-constexpr int mod = 998'244'353;
-using mint = ModInt<mod>;
 using mat = Mat<2, 2, mint>;
