@@ -33,7 +33,7 @@ struct Mat {
 		assert(a.r == r && a.c == c);
 		for (int i = 0; i < r; ++i) {
 			for (int j = 0; j < c; ++j) {
-				m[i * c + j] += a[i][j];
+				m[i][j] += a[i][j];
 			}
 		}
 		return *this;
@@ -42,7 +42,7 @@ struct Mat {
 		assert(a.r == r && a.c == c);
 		for (int i = 0; i < r; ++i) {
 			for (int j = 0; j < c; ++j) {
-				m[i * c + j] -= a[i][j];
+				m[i][j] -= a[i][j];
 			}
 		}
 		return *this;
@@ -83,10 +83,8 @@ struct Mat {
 
 	bool operator==(const M& b) const { return m == b.m; }
 
-	vector<T>& operator[](int i) {
-		return m[i];
-	}
-
+	const vector<T>& operator[](int i) const { return m[i]; }
+	vector<T>& operator[](int i) { return m[i]; }
 };
 
 constexpr int mod = 998'244'353;
